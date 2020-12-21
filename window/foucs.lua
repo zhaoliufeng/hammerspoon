@@ -87,7 +87,7 @@ function winfoucs(what)
   show_alert_with_counter(what, targets.screen, same_action_counter, length)
 
   --[[the front window will be the first item in wins array, 
-      the order will be change when another window come be the front,
+      the order will be change when another window come to the front,
       so just use the last item or first item in the array,can always take next window]]--
   local win = targets[length]
   if win ~= nil then
