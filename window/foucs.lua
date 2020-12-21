@@ -49,6 +49,11 @@ function show_alert(content, screen)
   hs.alert.show(content, hs.alert.defaultStyle, screen, 1)
 end
 
+function show_alert_with_counter(content, screen, counter, total)
+  local show_content = content..' '..counter..'/'..total;
+  hs.alert.show(show_content, hs.alert.defaultStyle, screen, 1)
+end
+
 function open_application(hint)
   print("open application ")
   print(hint)
@@ -57,7 +62,7 @@ end
 
 function winfoucs(what)
   local targets = get_target_windows(what)
-  show_alert(what, targets.screen)
+  -- show_alert(what, targets.screen)
   -- print_targets_title(targets)
   local length = table_length(targets)
 
@@ -72,14 +77,19 @@ function winfoucs(what)
   if last_aciton == what then
     same_action_counter = same_action_counter + 1;
     if same_action_counter > length then
-      same_action_counter = length
+      same_action_counter = 1
     end
   else
     last_aciton = what
     same_action_counter = 1
   end
   
-  local win = targets[same_action_counter]
+  show_alert_with_counter(what, targets.screen, same_action_counter, length)
+
+  --[[the front window will be the first item in wins array, 
+      the order will be change when another window come be the front,
+      so just use the last item or first item in the array,can always take next window]]--
+  local win = targets[length]
   if win ~= nil then
     win:focus()
   end
