@@ -62,7 +62,6 @@ end
 
 function winfoucs(what)
   local targets = get_target_windows(what)
-  -- show_alert(what, targets.screen)
   -- print_targets_title(targets)
   local length = table_length(targets)
 
@@ -84,8 +83,12 @@ function winfoucs(what)
     same_action_counter = 1
   end
   
-  show_alert_with_counter(what, targets.screen, same_action_counter, length)
-
+  if length == 1 then
+    show_alert(what, targets.screen)
+  else
+    show_alert_with_counter(what, targets.screen, same_action_counter, length)
+  end
+  
   --[[the front window will be the first item in wins array, 
       order will be change when another window come to the front,
       so just use the last item in the array,can always take next window]]--
